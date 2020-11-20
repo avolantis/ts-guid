@@ -1,22 +1,23 @@
 # `@avolantis/ts-guid`
 > TypeScript implementation of GUIDs (v4 RFC 4122 UUIDs)
 
-[![semver: v0.1.0](https://img.shields.io/badge/semver-v0.1.0-269539.svg?style=flat-square&logo=npm)](https://semver.org)
+[![npm semver](https://img.shields.io/badge/semver-v0.1.0--preview.0-269539.svg?style=flat-square&logo=npm)](https://www.npmjs.com/package/@avolantis/ts-guid)
 [![dependabot](https://img.shields.io/badge/dependabot-enabled-025e8c.svg?style=flat-square&logo=dependabot)](https://dependabot.com)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square&logo=prettier)](https://github.com/prettier/prettier)
 
 Features:
-- Use with JS or TS
-- OOP friendly
-- Three-Shakeable
+- Use with JavaScript or TypeScript
+- Supports node.js and the browser
+- OOP friendly API
+- Three-shakeable
 - Can generate collision-proof [RFC 4122](https://tools.ietf.org/html/rfc4122) V4 GUIDs
 - Zero package.json dependencies
 - Shipped as
-    - es modules (esm)
-    - browser code (iife)
-    - [unpkg](https://unpkg.com) bundle (umd)
-    - common js modules (cjs)
-- String comparison rather than number arrays (great performance)
+    - es modules *(esm)*
+    - browser code *(iife)*
+    - [unpkg](https://unpkg.com) bundle *(umd)*
+    - common js modules *(cjs)*
+- String comparison rather than number arrays (higher performance)
 - With a protected constructor to enable extending
 
 ## Usage
@@ -84,7 +85,10 @@ Returns the parsed `Guid` or `Guid.EMPTY`, if given an invalid value.
 Determines if a value represents a valid GUID, using the version specific validator.
 
 #### `Guid.handler`
+The current version handler. Default: `VersionHandlers.V4`
+
 #### `Guid.EMPTY` (read-only)
+The `Guid` that represents an empty (NIL) GUID.
 
 ### Instance methods and properties
 #### `asString()`
@@ -134,6 +138,9 @@ Guid.handler = VersionHandlers.V4;
 ```
 
 ### Enabling unsafe random generation
+Only a cryptographic random number generator is recommended to seed the
+generation of new GUIDs, however certain JS platforms still does not provide
+such API. You can explicitly enable fallback behavior to `Math.random()`, like so:
 
 ```js
 import { Guid, VersionHandlers } from "@avolantis/ts-guid";
@@ -151,11 +158,11 @@ See the [GitHub issues](https://github.com/avolantis/ts-guid/issues) for more in
 ## Similar libraries
 - [uuid](https://github.com/uuidjs/uuid) \
 The industry standard JS implementation of UUIDs. It is an EcmaScript Stage 1 proposal,
-but without TS declarations and with a not OOP friendly API.
+but without TS declarations and with a not so OOP-friendly API.
 - [ts-guid](https://github.com/willemtoerien/ts-guid) \
-No license, improper random generation and validation, no multi-version support
+No license, improper random generation and validation, no multi-version support.
 - [guid-typescript](https://github.com/NicolasDeveloper/guid-typescript) \
-No license and breaking bugs, no multi-version support
+No license and breaking bugs, no multi-version support.
 
 ## License
 
