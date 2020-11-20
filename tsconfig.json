@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+      "watch": true,
+      "noEmit": true,
+      "strict": true,
+      "sourceMap": true,
+      "declaration": true,
+      "declarationMap": true,
+      "rootDir": "src",
+      "target": "esnext",
+      "module": "esnext",
+      "moduleResolution": "node",
+      "types": [
+        "node",
+        "jest"
+      ],
+      "lib": [
+        "esnext",
+        "scripthost",
+        "dom"
+      ]
+    },
+    "include": [
+      "src/**/*.ts",
+      "tests/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules",
+      "types"
+    ]
+}
