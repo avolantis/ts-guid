@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - develop
+      - 'fix/*'
+      - 'release/*'
+  pull_request:
+    branches:
+      - develop
+      - 'fix/*'
+      - 'release/*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v1.4.4
+        with:
+          node-version: 14.5.0
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup yarn cache
+        uses: actions/cache@v1
+        env:
+          cache-name: cache-yarn
+        with:
+          path: ~/.cache/yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn ci
+        env:
+          CI: true
+      - name: Build
+        run: yarn build:ci
+      - name: Test
+        run: yarn test:ci
+      - name: Upload coverage report
+        uses: avolantis/coveralls-github-action@v1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: "coverage/lcov.info"
+          flag-name: CI
