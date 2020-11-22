@@ -10,10 +10,10 @@ updates:
     schedule:
       interval: "weekly"
     labels:
-      - "area/dependencies"
+      - "dependencies"
     target-branch: "develop"
     commit-message:
       prefix: "build"
       prefix-development: "build"
       include: "scope"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 10
