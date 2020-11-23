@@ -2,8 +2,9 @@ const conventional = require("@commitlint/config-conventional");
 
 const conventionalTypes = conventional.rules["type-enum"][2];
 const types = [
-  ...conventionalTypes
+  ...conventionalTypes.filter((type) => type !== "style"),
   // Add allowed commit types here
+  "wip"
 ];
 
 module.exports = {

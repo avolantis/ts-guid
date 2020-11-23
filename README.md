@@ -1,22 +1,27 @@
 # `@avolantis/ts-guid`
-> TypeScript implementation of GUIDs (v4 RFC 4122 UUIDs)
+> TypeScript implementation of [RFC 4122](https://tools.ietf.org/html/rfc4122) GUIDs (UUIDs)
 
-[![npm semver](https://img.shields.io/badge/semver-v0.1.0--preview.0-269539.svg?style=flat-square&logo=npm)](https://www.npmjs.com/package/@avolantis/ts-guid)
-[![dependabot](https://img.shields.io/badge/dependabot-enabled-025e8c.svg?style=flat-square&logo=dependabot)](https://dependabot.com)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square&logo=prettier)](https://github.com/prettier/prettier)
+[![npm semver](https://img.shields.io/badge/semver-v0.1.0--preview.0-269539.svg?logo=npm)](https://www.npmjs.com/package/@avolantis/ts-guid)
+![develop ci](https://github.com/avolantis/ts-guid/workflows/CI/badge.svg?branch=develop)
+[![coverage](https://coveralls.io/repos/github/avolantis/ts-guid/badge.svg)](https://coveralls.io/github/avolantis/ts-guid)
+[![dependabot](https://img.shields.io/badge/dependabot-enabled-025e8c.svg?logo=dependabot)](https://dependabot.com)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?logo=prettier)](https://github.com/prettier/prettier)
 
 Features:
 - Use with JavaScript or TypeScript
 - Supports node.js and the browser
 - OOP friendly API
-- Three-shakeable
+- Tree-shakeable
 - Can generate collision-proof [RFC 4122](https://tools.ietf.org/html/rfc4122) V4 GUIDs
-- Zero package.json dependencies
+- Zero package.json production dependencies
 - Shipped as
-    - es modules *(esm)*
-    - browser code *(iife)*
-    - [unpkg](https://unpkg.com) bundle *(umd)*
-    - common js modules *(cjs)*
+    - TypeScript sources (`src/`)
+    - Also, compiled to ES Next modules (`lib/`)
+    - Polyfilled distribution bundles (`dist/`):
+      - ES modules *(esm)* targeting browsers
+      - Browser code as self-executing function *(iife)*
+      - [Unpkg](https://unpkg.com) bundle *(umd)*
+      - CommonJs bundle *(cjs)* targeting node.js > v12
 - String comparison rather than number arrays (higher performance)
 - With a protected constructor to enable extending
 
@@ -30,10 +35,12 @@ npm install --save @avolantis/ts-guid
 
 Then in your program files:
 ```javascript
-// TypeScript or ES Modules
+// TypeScript or ES Modules (transpilation needed)
+import { Guid } from "@avolantis/ts-guid/lib";
+// ES Modules for browsers, pretranspiled
 import { Guid } from "@avolantis/ts-guid";
-// Common Js require
-const { Guid } = require("Guid");
+// Common Js require for node.js
+const { Guid } = require("@avolantis/ts-guid");
 
 // ...
 
@@ -44,8 +51,33 @@ console.log(Guid.newGuid().asJson());
 ```
 
 **NOTE**
-> If you are targeting browsers without Crypto API support, you either need to polyfill this feature,
-> or enable unsafe random generation (not recommended, see more below).
+> If you are targeting browsers without Crypto API support, you either need to polyfill this feature, or
+> enable unsafe random generation (not recommended, see more below). Polyfills for Crypto API are not
+> included in the distribution bundles.
+
+### unpkg usage
+This package includes transpiled and polyfilled code for direct usage via [unpkg](https://unpkg.com) or
+[skypack](https://www.skypack.dev/) in browsers that support ESM features or satisfies the
+`> 0.25%, last 2 versions, not dead` [browserslist](https://github.com/browserslist/browserslist) query. 
+
+```html
+// Browsers with ESM support
+<script type="module" src="https://unpkg.com/@avolantis/ts-guid/dist/ts-guid.esm.min.js"></script>
+// UMD
+<script src="https://unpkg.com/@avolantis/ts-guid"></script>
+// IIFE
+<script src="https://unpkg.com/@avolantis/ts-guid/dist/ts-guid.iife.min.js"></script>
+
+// Recommended (target both):
+<script type="module" src="https://unpkg.com/@avolantis/ts-guid/dist/ts-guid.esm.min.js"></script>
+<script nomodule src="https://unpkg.com/@avolantis/ts-guid"></script>
+```
+
+Then in your scripts:
+```javascript
+const { Guid } = TsGuid;
+// ...
+```
 
 ## API
 
