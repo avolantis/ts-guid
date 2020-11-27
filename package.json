@@ -35,11 +35,14 @@
     "clean": "rimraf dist lib types",
     "clean:deps": "rimraf node_modules",
     "dev": "tsc",
-    "lint": "eslint --fix .",
+    "lint": "yarn lint:files .",
+    "lint:files": "eslint --fix",
     "release": "standard-version",
-    "test": "jest -c ./config/jest.js",
+    "test": "yarn test:node && yarn test:jsdom",
+    "test:node": "cross-env TEST_ENVIRONMENT=node jest -c ./config/jest.js",
+    "test:jsdom": "cross-env TEST_ENVIRONMENT=jsdom jest -c ./config/jest.js",
     "test:ci": "cross-env CI=true yarn lint && yarn test:coverage",
-    "test:coverage": "yarn test --coverage"
+    "test:coverage": "yarn test:node --coverage && yarn test:jsdom"
   },
   "gitHooks": {
     "pre-commit": "lint-staged -c ./config/lint-staged.js",
