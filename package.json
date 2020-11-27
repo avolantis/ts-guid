@@ -7,7 +7,8 @@
     "unique",
     "uniqueidentifier",
     "id",
-    "identifier"
+    "identifier",
+    "uuid-generator"
   ],
   "description": "TypeScript implementation of GUIDs (v4 UUIDs)",
   "homepage": "https://github.com/avolantis/ts-guid#readme",
@@ -29,10 +30,13 @@
   "scripts": {
     "build": "yarn clean && rollup -c ./config/rollup.js",
     "build:ci": "cross-env CI=true rollup -c ./config/rollup.js",
+    "changelog": "conventional-changelog -i ./CHANGELOG.md -s -n ./config/changelog.js",
     "ci": "yarn install --frozen-lockfile --non-interactive",
     "clean": "rimraf dist lib types",
+    "clean:deps": "rimraf node_modules",
     "dev": "tsc",
     "lint": "eslint --fix .",
+    "release": "standard-version",
     "test": "jest -c ./config/jest.js",
     "test:ci": "cross-env CI=true yarn lint && yarn test:coverage",
     "test:coverage": "yarn test --coverage"
@@ -57,6 +61,8 @@
     "@typescript-eslint/eslint-plugin": "^4.4.0",
     "@typescript-eslint/parser": "^4.4.0",
     "commitlint": "^11.0.0",
+    "conventional-changelog-conventionalcommits": "^4.5.0",
+    "conventional-changelog-cli": "^2.1.1",
     "cross-env": "^7.0.2",
     "eslint": "^7.11.0",
     "eslint-plugin-jest": "^24.1.0",
@@ -73,6 +79,7 @@
     "rollup-plugin-node-externals": "^2.2.0",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.29.0",
+    "standard-version": "^9.0.0",
     "ts-jest": "^26.4.3",
     "typescript": "^4.0.5",
     "yorkie": "^2.0.0"
