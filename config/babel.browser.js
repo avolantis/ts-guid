@@ -6,8 +6,8 @@ const presets = [
         browsers: "> 0.25%, last 2 versions, not dead",
         esmodules: false
       },
-      useBuiltIns: "usage",
-      corejs: "3.7.0"
+      useBuiltIns: "entry",
+      corejs: "3"
     }
   ]
 ];

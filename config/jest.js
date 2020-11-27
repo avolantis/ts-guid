@@ -4,7 +4,10 @@ module.exports = {
   rootDir: resolve(__dirname, "../"),
   preset: "ts-jest",
   testEnvironment: process.env.TEST_ENVIRONMENT,
-  collectCoverageFrom: ["<rootDir>/src/**/*.ts"],
+  collectCoverageFrom: [
+    "<rootDir>/src/**/*.ts",
+    "!<rootDir>/src/polyfilled.ts"
+  ],
 
   coverageDirectory: "<rootDir>/coverage",
   globals: {

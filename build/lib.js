@@ -7,7 +7,7 @@ import typescript from "typescript";
 import { resolve as resolvePath } from "path";
 
 export const lib = {
-  input: "src/**/*[^d].ts",
+  input: "src/**/*.ts",
   output: {
     dir: "lib",
     format: "esm",
@@ -17,6 +17,8 @@ export const lib = {
     commonjs(),
     multi(),
     externals({
+      include: ["core-js", "regenerator-runtime"],
+      exclude: ["crypto"],
       packagePath: resolvePath(__dirname, "../package.json")
     }),
     resolve(),
@@ -26,7 +28,7 @@ export const lib = {
       tsconfigOverride: {
         watch: false,
         noEmit: false,
-        exclude: ["node_modules", "types", "tests"]
+        exclude: ["node_modules", "tests"]
       }
     })
   ]

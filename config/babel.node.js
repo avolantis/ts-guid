@@ -3,11 +3,11 @@ const presets = [
     "@babel/env",
     {
       targets: {
-        node: "14",
+        node: "12",
         esmodules: false
       },
-      useBuiltIns: "usage",
-      corejs: "3.7.0"
+      useBuiltIns: "entry",
+      corejs: "3"
     }
   ]
 ];
