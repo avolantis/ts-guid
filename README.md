@@ -61,14 +61,14 @@ This package includes transpiled and polyfilled code for direct usage via [unpkg
 `> 0.25%, last 2 versions, not dead` [browserslist](https://github.com/browserslist/browserslist) query. 
 
 ```html
-// Browsers with ESM support
+<!-- Browsers with ESM support -->
 <script type="module" src="https://unpkg.com/@avolantis/ts-guid/dist/ts-guid.esm.min.js"></script>
-// UMD
+<!-- UMD -->
 <script src="https://unpkg.com/@avolantis/ts-guid"></script>
-// IIFE
+<!-- IIFE -->
 <script src="https://unpkg.com/@avolantis/ts-guid/dist/ts-guid.iife.min.js"></script>
 
-// Recommended (target both):
+<!-- Recommended (target both): -->
 <script type="module" src="https://unpkg.com/@avolantis/ts-guid/dist/ts-guid.esm.min.js"></script>
 <script nomodule src="https://unpkg.com/@avolantis/ts-guid"></script>
 ```
