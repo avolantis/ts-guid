@@ -107,7 +107,8 @@ Returns true, if `val1` parsed equals to `val2` parsed.
 
 #### `Guid.parse(value)`
 Parses a value that represents a GUID.
-Returns the parsed `Guid` or `Guid.EMPTY`, if given an invalid value.
+Returns the parsed `Guid` or `Guid.EMPTY`, if given an invalid value.\
+**Note:** This method has a known bug. See [#9](https://github.com/avolantis/ts-guid/issues/9).
 
 #### `Guid.parseJson(json)`
 Parses a json string that represents a GUID state.
@@ -127,7 +128,8 @@ The `Guid` that represents an empty (NIL) GUID.
 Returns the string representation of the GUID.
 
 #### `asBytes()`
-Returns the byte array representation of the GUID.
+~~Returns the byte array representation of the GUID.~~\
+**Note:** This method has a known bug. See [#9](https://github.com/avolantis/ts-guid/issues/9).
 
 #### `asJson()`
 Returns the json representation of the GUID state.
@@ -143,6 +145,9 @@ Returns true if `other` is Guid and represents the same GUID as this one.
 
 #### `valueEquals(other)`
 Returns true if the Guid represented by `other` is the same represented by this one.
+
+#### `valueOf()`
+Returns the primitive (string) representation of this GUID.
 
 #### `empty` (read-only)
 True if the GUID equals to `Guid.EMPTY`, otherwise false.
