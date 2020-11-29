@@ -26,8 +26,10 @@ export const lib = {
       typescript: typescript,
       tsconfig: resolvePath(__dirname, "../tsconfig.json"),
       tsconfigOverride: {
-        watch: false,
-        noEmit: false,
+        compilerOptions: {
+          watch: false,
+          rootDir: "src"
+        },
         exclude: ["node_modules", "tests"]
       }
     })

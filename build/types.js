@@ -11,7 +11,7 @@ export const types = {
     format: "es"
   },
   plugins: [
-    dts(),
+    dts({ compilerOptions: { rootDir: resolvePath(__dirname, "../src") } }),
     multi(),
     copy({
       targets: [

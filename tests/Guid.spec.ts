@@ -23,7 +23,7 @@ function expectByteArray(numbers: number[] | Uint8Array) {
     expect(num).toBeGreaterThanOrEqual(0);
   });
 }
-
+/*
 it("can parse a valid GUID string", () => {
   const guid = Guid.parse(str);
   expectValidParsed(guid);
@@ -33,6 +33,7 @@ it("can parse a valid GUID number array", () => {
   const guid = Guid.parse(btr);
   expectValidParsed(guid);
 });
+*/
 
 it("can convert to string representation", () => {
   const guid = Guid.newGuid();
