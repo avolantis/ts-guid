@@ -154,6 +154,18 @@ export class Guid {
   }
 
   /**
+   * Returns the primitive (string) representation of this {@link Guid}.
+   *
+   * @remarks
+   * Because of this overload, operators that call <tt>valueOf()</tt> can
+   * be used with {@link Guid}-s, like <tt>&lt;</tt> or <tt>&gt;=</tt>,
+   * but not <tt>==</tt> or <tt>===</tt>.
+   */
+  public valueOf(): string {
+    return this.value;
+  }
+
+  /**
    * Tries to parse a {@link Guid} from an input value.
    * @param {*} value the value to be parsed
    * @returns {Guid} the parsed valid {@link Guid} or {@link Guid.EMPTY}
