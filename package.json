@@ -1,6 +1,6 @@
 {
   "name": "@avolantis/ts-guid",
-  "version": "0.1.0-preview.0",
+  "version": "0.1.0-preview.1",
   "keywords": [
     "guid",
     "uuid",
@@ -59,8 +59,8 @@
     "@typescript-eslint/eslint-plugin": "^4.4.0",
     "@typescript-eslint/parser": "^4.4.0",
     "commitlint": "^12.0.1",
-    "conventional-changelog-conventionalcommits": "^4.5.0",
     "conventional-changelog-cli": "^2.1.1",
+    "conventional-changelog-conventionalcommits": "^4.5.0",
     "cross-env": "^7.0.2",
     "esbuild": "^0.9.0",
     "eslint": "^7.11.0",
