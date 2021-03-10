@@ -1,4 +1,4 @@
-﻿# To get started with Dependabot version updates, you'll need to specify which
+# To get started with Dependabot version updates, you'll need to specify which
 # package ecosystems to update and where the package manifests are located.
 # Please see the documentation for all configuration options:
 # https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
@@ -10,10 +10,9 @@ updates:
     schedule:
       interval: "weekly"
     labels:
-      - "area/dependencies"
+      - "dependencies"
     target-branch: "develop"
     commit-message:
       prefix: "build"
       prefix-development: "build"
-      include: "scope"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 10
