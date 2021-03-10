@@ -51,7 +51,7 @@
   "prettier": "./config/prettier.js",
   "dependencies": {},
   "devDependencies": {
-    "@commitlint/config-conventional": "^11.0.0",
+    "@commitlint/config-conventional": "^12.0.1",
     "@rollup/plugin-commonjs": "^16.0.0",
     "@rollup/plugin-node-resolve": "^11.2.0",
     "@types/jest": "^26.0.15",
