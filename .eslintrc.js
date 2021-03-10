@@ -59,10 +59,7 @@ module.exports = {
       env: {
         jest: true
       },
-      files: "tests/**/*.ts",
-      globals: {
-        Guid: false
-      }
+      files: "tests/**/*.ts"
     }
   ]
 };
