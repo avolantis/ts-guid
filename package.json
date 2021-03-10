@@ -39,8 +39,8 @@
     "lint:files": "eslint --fix",
     "release": "standard-version",
     "test": "yarn test:node && yarn test:jsdom",
-    "test:node": "cross-env TEST_ENVIRONMENT=node jest -c ./config/jest.js",
-    "test:jsdom": "cross-env TEST_ENVIRONMENT=jsdom jest -c ./config/jest.js",
+    "test:node": "jest -c config/jest-node.js",
+    "test:jsdom": "jest -c config/jest-jsdom.js",
     "test:ci": "cross-env CI=true yarn lint && yarn test:coverage",
     "test:coverage": "yarn test:node --coverage && yarn test:jsdom"
   },
