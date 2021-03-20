@@ -1,4 +1,4 @@
-import { BYTE_COUNT, EMPTY_VALUE } from "../constants";
+import { BYTE_COUNT, EMPTY_VALUE } from "../Constants";
 
 /**
  * The default generator function, which generates unique and valid V4 GUID-s
@@ -7,20 +7,26 @@ import { BYTE_COUNT, EMPTY_VALUE } from "../constants";
 export function v4_crypto(): number[] | string {
   let bytes: ArrayLike<number> | null = null;
 
-  if (!!require && typeof require == "function") {
+  if (typeof require == "function") {
     /* eslint-disable */
     // Aliasing trick to make bundlers ignore this
     const loadModule = require;
-    bytes = loadModule("crypto")?.randomBytes(BYTE_COUNT);
+    bytes = loadModule("crypto")?.randomBytes?.(BYTE_COUNT);
     /* eslint-enable */
   }
 
   if (!bytes) {
-    if (!window.crypto) {
+    bytes = new Uint8Array(BYTE_COUNT);
+    window?.crypto?.getRandomValues?.(bytes as Uint8Array);
+    if ((bytes as Uint8Array).every((b) => b === 0)) {
+      // No cryptographic random source is available
       return EMPTY_VALUE;
     }
+  }
 
-    bytes = window?.crypto?.getRandomValues?.(new Uint8Array(BYTE_COUNT));
+  if (!bytes) {
+    // No cryptographic random source is available
+    return EMPTY_VALUE;
   }
 
   const result = new Array<number>(BYTE_COUNT);

@@ -1,6 +1,4 @@
-import { Guid } from "../src";
-import { GuidVersion } from "../src/GuidVersion";
-import { GuidVariant } from "../src/GuidVariant";
+import { Guid, GuidVersion, GuidVariant } from "../src";
 
 const VALIDATOR = /([a-f0-9]{8})[-_]?([a-f0-9]{4})[-_]?([1-5][a-f0-9]{3})[-_]?([89ab][a-f0-9]{3})[-_ ]?([a-f0-9]{12})/i;
 

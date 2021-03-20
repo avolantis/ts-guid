@@ -2,6 +2,55 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0-preview.3](https://github.com/avolantis/ts-guid/compare/v0.1.0-preview.2...v0.1.0-preview.3) (2021-03-20)
+
+## [0.1.0-preview.2](https://github.com/avolantis/ts-guid/compare/v0.1.0-preview.1...v0.1.0-preview.2) (2021-03-20)
+
+
+### Bug Fixes
+
+* fixed byte array conversion bug ([563cc61](https://github.com/avolantis/ts-guid/commit/563cc61b522703c0362cd7224efcade919a2ce84))
+* fixed comparison operators not working bug ([53ad9f2](https://github.com/avolantis/ts-guid/commit/53ad9f22f84995f62ccafd9eb8ebe1f0de9241c8))
+* fixed enumerable decorator not taking effect bug ([a70780c](https://github.com/avolantis/ts-guid/commit/a70780c79d6e1d6c4411934a3393b112678084c4))
+* fixed generator testing fails when should not bug ([1979b99](https://github.com/avolantis/ts-guid/commit/1979b994bd12804d379d31d218ccf5044a745f5f))
+* fixed unsafe random generating bad values ([43dab0b](https://github.com/avolantis/ts-guid/commit/43dab0b792971ce19945a1d7e9ec18d13fec6dd6))
+* fixed v4 crypto 'require is not defined' bug ([5034523](https://github.com/avolantis/ts-guid/commit/5034523a88128b2f6b8fa66f65d1cd0a0f542c46))
+
+
+### Build System
+
+* bump @types/node from 14.14.33 to 14.14.35 ([e665f48](https://github.com/avolantis/ts-guid/commit/e665f4818208a19233f4fa8341ccd13b3dfdce3d))
+* bump esbuild from 0.9.0 to 0.9.2 ([25d6563](https://github.com/avolantis/ts-guid/commit/25d6563c4dcbab40d073d571509c0e3f90a3695b))
+* bump eslint from 7.14.0 to 7.22.0 ([39ae69a](https://github.com/avolantis/ts-guid/commit/39ae69a3f30225fae330bbd10efd0bd6c8a5dd1d))
+* bump eslint-plugin-jest from 24.2.1 to 24.3.2 ([8ea7f0c](https://github.com/avolantis/ts-guid/commit/8ea7f0c161f538e7ee4857799369cf1d4d3f1ce3))
+* bump eslint-plugin-prettier from 3.1.4 to 3.3.1 ([11cff2b](https://github.com/avolantis/ts-guid/commit/11cff2b419a75c26b469e68e1af992103c23e14f))
+* bump lint-staged from 10.5.1 to 10.5.4 ([a3829d0](https://github.com/avolantis/ts-guid/commit/a3829d070f4a32df12d21c066a3bae0b0a3ac24b))
+* bump prettier from 2.2.0 to 2.2.1 ([38e6875](https://github.com/avolantis/ts-guid/commit/38e68756c2399fa50af7048b0cd739aa6db9f61a))
+* bump rollup from 2.41.0 to 2.41.2 ([5d7f72d](https://github.com/avolantis/ts-guid/commit/5d7f72d480e224e16c3de454091c091cfe8fa7c3))
+* bump rollup-plugin-esbuild from 3.0.0 to 3.0.2 ([c6ce50c](https://github.com/avolantis/ts-guid/commit/c6ce50ce285477354bdbe83e27fb67ab29637bc2))
+* declaration maps and prepare for tests ([d81a33e](https://github.com/avolantis/ts-guid/commit/d81a33e1fb65b8d493cdb2386916479a8443580c))
+
+
+### Test-related
+
+* factory methods ([693dd33](https://github.com/avolantis/ts-guid/commit/693dd336eee8b626e87c5ad8b97d7c763af17279))
+* fixed missing coverage ([61a7f43](https://github.com/avolantis/ts-guid/commit/61a7f434d5aebaebd52a647ff56898d4aba6baff))
+* generator functions ([4aac211](https://github.com/avolantis/ts-guid/commit/4aac211a47aea0a0d184aad652ff473b6307601b))
+* instance methods ([c55ce71](https://github.com/avolantis/ts-guid/commit/c55ce71e5ae7f7ff8d9e8f4c1a8bfc23f7c961de))
+* static methods ([865bb5c](https://github.com/avolantis/ts-guid/commit/865bb5ca68f35751f0428ee02db634485c8a0b48))
+
+
+### Code Refactoring
+
+* fixed linter warning and file naming ([cbe3ce0](https://github.com/avolantis/ts-guid/commit/cbe3ce0998b65c5be94f25119cafd2355e0ffd5f))
+
+
+### Others
+
+* auto bump version number in package.json ([5af646b](https://github.com/avolantis/ts-guid/commit/5af646b3111ac2c864aeabbe21597d5746f612f2))
+* publish ([cf37af9](https://github.com/avolantis/ts-guid/commit/cf37af9e7e615c24081db488dfb570b5dfdc216f))
+* switch to jsdom-only tests ([cb66e2e](https://github.com/avolantis/ts-guid/commit/cb66e2e9fe3752a35f40f8c5fc0c274d92ab4a83))
+
 ## [0.1.0-preview.1](https://github.com/avolantis/ts-guid/compare/v0.1.0-preview.0...v0.1.0-preview.1) (2021-03-10)
 
 

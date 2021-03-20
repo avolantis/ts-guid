@@ -1,7 +1,7 @@
 # `@avolantis/ts-guid`
 > TypeScript implementation of [RFC 4122](https://tools.ietf.org/html/rfc4122) GUIDs (UUIDs)
 
-[![npm semver](https://img.shields.io/badge/semver-v0.1.0--preview.1-269539.svg?logo=npm)](https://www.npmjs.com/package/@avolantis/ts-guid)
+[![npm semver](https://img.shields.io/badge/semver-v0.1.0--preview.3-269539.svg?logo=npm)](https://www.npmjs.com/package/@avolantis/ts-guid)
 ![develop ci](https://github.com/avolantis/ts-guid/workflows/CI/badge.svg?branch=develop)
 [![coverage](https://coveralls.io/repos/github/avolantis/ts-guid/badge.svg)](https://coveralls.io/github/avolantis/ts-guid)
 [![dependabot](https://img.shields.io/badge/dependabot-enabled-025e8c.svg?logo=dependabot)](https://dependabot.com)
@@ -15,8 +15,8 @@ Features:
 - Zero package.json production dependencies
 - Shipped as
     - TypeScript sources (`src/`)
+    - TypeScript declarations (`types/`)
     - Distribution bundles (`dist/`):
-      - TypeScript declarations
       - ESNext modules *(esm)* targeting browsers and node
       - ES6 modules *(esm)* targeting browsers and node
       - ES6 self-executing function *(iife)*
