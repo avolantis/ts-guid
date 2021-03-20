@@ -226,10 +226,10 @@ export class Guid {
   ): string | null {
     switch (hint) {
       case "string":
+      case "default":
         return "{" + this.toString() + "}";
       case "number":
-      case "default":
-        return null;
+        return this.valueOf();
     }
   }
 
