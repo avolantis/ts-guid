@@ -1,8 +1,8 @@
 import { GuidVersion } from "./GuidVersion";
 import { GuidVariant } from "./GuidVariant";
 import { v4_crypto } from "./generator";
-import { BYTE_COUNT, EMPTY_BYTES, EMPTY_VALUE, FORMATTER } from "./constants";
-import { NonEnumerable } from "./NonEnumerable";
+import { BYTE_COUNT, EMPTY_BYTES, EMPTY_VALUE, FORMATTER } from "./Constants";
+import { enumerable } from "./Enumerable";
 
 /**
  * Class representing a GUID.
@@ -10,22 +10,22 @@ import { NonEnumerable } from "./NonEnumerable";
  * @author Avolantis <info@avolantis.net> (https://avolantis.net)
  */
 export class Guid {
-  @NonEnumerable
+  @enumerable()
   private static readonly WS_AND_SEP_REGEX = /[\s-_]/g;
-  @NonEnumerable
+  @enumerable()
   private static readonly NORMAL_SEP = "-";
 
-  @NonEnumerable
+  @enumerable()
   private static _generator: () => number[] | string = v4_crypto;
 
-  @NonEnumerable
+  @enumerable()
   protected readonly _value: string;
 
-  @NonEnumerable
+  @enumerable()
   private _variant?: number;
-  @NonEnumerable
+  @enumerable()
   private _version?: number;
-  @NonEnumerable
+  @enumerable()
   private _bytes?: number[];
 
   /**
@@ -54,6 +54,7 @@ export class Guid {
    * an 8-bit unsigned integer.
    * @returns {number}
    */
+  @enumerable(true)
   public get clock_seq_hi_and_reserved(): number {
     return this.toByteArray()[8];
   }
@@ -63,6 +64,7 @@ export class Guid {
    * integer.
    * @returns {number}
    */
+  @enumerable(true)
   public get clock_seq_low(): number {
     return this.toByteArray()[9];
   }
@@ -73,6 +75,7 @@ export class Guid {
    * RFC.
    * @returns {number[]}
    */
+  @enumerable(true)
   public get node(): number[] {
     return this.toByteArray().slice(11);
   }
@@ -82,6 +85,7 @@ export class Guid {
    * {@link GuidVariant} enum.
    * @returns {GuidVariant}
    */
+  @enumerable(true)
   public get variant(): GuidVariant {
     if (!this._variant) {
       if (!this._bytes) {
@@ -98,6 +102,7 @@ export class Guid {
    * {@link GuidVersion} enum).
    * @returns {GuidVersion}
    */
+  @enumerable(true)
   public get version(): GuidVersion {
     if (!this._version) {
       if (!this._bytes) {
@@ -114,6 +119,7 @@ export class Guid {
    * integer.
    * @returns {number}
    */
+  @enumerable(true)
   public get time_low(): number {
     return Guid.toNumber(
       this.toByteArray().slice(0, 4),
@@ -126,6 +132,7 @@ export class Guid {
    * integer.
    * @returns {number}
    */
+  @enumerable(true)
   public get time_mid(): number {
     return Guid.toNumber(
       this.toByteArray().slice(4, 6),
@@ -138,6 +145,7 @@ export class Guid {
    * unsigned integer.
    * @returns {number}
    */
+  @enumerable(true)
   public get time_high_and_version(): number {
     return Guid.toNumber(
       this.toByteArray().slice(6, 8),
@@ -150,6 +158,7 @@ export class Guid {
    * @param {Guid} other
    * @returns {number}
    */
+  @enumerable(true)
   public compare(other: Guid): -1 | 0 | 1 {
     return this._value.localeCompare(other._value) as -1 | 0 | 1;
   }
@@ -164,6 +173,7 @@ export class Guid {
    * @param {Guid} other
    * @returns {boolean}
    */
+  @enumerable(true)
   public equals(other: Guid): boolean {
     return Guid.isGuid(other) && this._value === other._value;
   }
@@ -172,6 +182,7 @@ export class Guid {
    * Returns true if this {@link Guid} is equals to {@link Guid.EMPTY}.
    * @returns boolean
    */
+  @enumerable(true)
   public isEmpty(): boolean {
     return this._value === EMPTY_VALUE;
   }
@@ -180,6 +191,7 @@ export class Guid {
    * Returns the 16-byte value of this {@link Guid}.
    * @returns {number[]}
    */
+  @enumerable(true)
   public toByteArray(): number[] {
     if (!this._bytes) {
       this._bytes = Guid.stringToBytes(
@@ -198,6 +210,7 @@ export class Guid {
    * {@link Guid} prototypes.
    * @returns {string}
    */
+  @enumerable(true)
   public toJSON(): string {
     return this.toString();
   }
@@ -213,10 +226,10 @@ export class Guid {
   ): string | null {
     switch (hint) {
       case "string":
+      case "default":
         return "{" + this.toString() + "}";
       case "number":
-      case "default":
-        return null;
+        return this.valueOf();
     }
   }
 
@@ -226,6 +239,7 @@ export class Guid {
    * each group of lowercase hexadecimal numbers.
    * @returns {string}
    */
+  @enumerable(true)
   public toString(): string {
     return this._value;
   }
@@ -238,6 +252,7 @@ export class Guid {
    * be used with {@link Guid}-s, like <tt>&lt;</tt> or <tt>&gt;=</tt>,
    * but not <tt>==</tt> or <tt>===</tt>.
    */
+  @enumerable(true)
   public valueOf(): string {
     return this._value;
   }
@@ -245,11 +260,13 @@ export class Guid {
   /**
    * Represents an empty GUID.
    */
+  @enumerable(true)
   public static readonly EMPTY: Guid = new Guid(EMPTY_VALUE, EMPTY_BYTES);
 
   /**
    * Gets the generator function
    */
+  @enumerable(true)
   public static get generator(): () => number[] | string {
     return this._generator;
   }
@@ -271,7 +288,7 @@ export class Guid {
           "The generator function does not generate valid bytes"
         );
       }
-      if (val1.some((x) => val2.indexOf(x) > -1)) {
+      if (val1.every((x, i) => val2[i] === x)) {
         throw new TypeError(
           "The generator function does not generate unique values"
         );
@@ -318,6 +335,7 @@ export class Guid {
    * @param {Guid} b
    * @returns {boolean}
    */
+  @enumerable(true)
   public static equals(a: Guid, b: Guid): boolean {
     return Guid.isGuid(a) && a.equals(b);
   }
@@ -327,6 +345,7 @@ export class Guid {
    * @param a
    * @param b
    */
+  @enumerable(true)
   public static compare(a: Guid, b: Guid): -1 | 0 | 1 {
     return a.compare(b);
   }
@@ -335,6 +354,7 @@ export class Guid {
    * Creates a new {@link Guid} from a byte array.
    * @param bytes a 16-length array of 8-bit unsigned integers
    */
+  @enumerable(true)
   public static fromByteArray(bytes: number[]): Guid {
     const result = Guid.checkBytes(bytes);
 
@@ -373,6 +393,7 @@ export class Guid {
    * @param {*} value the value to be tested
    * @returns {boolean}
    */
+  @enumerable(true)
   public static isGuid(value: unknown): value is Guid {
     return value instanceof Guid;
   }
@@ -399,6 +420,7 @@ export class Guid {
    * @returns {Guid} the parsed valid {@link Guid} or {@link Guid.EMPTY}
    * @throws {TypeError} if <tt>value</tt> is not a {@link Guid} nor a string (but does not coerce false).
    */
+  @enumerable(true)
   public static parse(value: unknown): Guid {
     if (!value) {
       return Guid.EMPTY;
@@ -426,6 +448,7 @@ export class Guid {
    * @param {*} value the value to be tested
    * @returns {boolean}
    */
+  @enumerable(true)
   public static validate(value: unknown): boolean {
     if (!value) {
       return false;
@@ -446,7 +469,7 @@ export class Guid {
     return false;
   }
 
-  @NonEnumerable
+  @enumerable()
   private static checkBytes(
     bytes: number[]
   ): [number[], GuidVariant, GuidVersion] | null {
@@ -483,7 +506,7 @@ export class Guid {
     return [bytes, variant, version];
   }
 
-  @NonEnumerable
+  @enumerable()
   private static checkString(
     value: string
   ): [string, GuidVariant, GuidVersion] | null {
@@ -520,7 +543,7 @@ export class Guid {
     return [result, variant, version];
   }
 
-  @NonEnumerable
+  @enumerable()
   private static stringToBytes(value: string, bigEndian: boolean): number[] {
     while (value.indexOf(Guid.NORMAL_SEP) > 0) {
       // remove all separator characters
@@ -531,7 +554,7 @@ export class Guid {
 
     for (let i = 1; i <= 32; i += 2) {
       // 2 hex characters form a single byte
-      bytes[i] = parseInt(value.substring(i - 1, i + 1), 16);
+      bytes[i / 2] = parseInt(value.substring(i - 1, i + 1), 16);
     }
 
     if (!bigEndian) {
@@ -542,7 +565,7 @@ export class Guid {
     return bytes;
   }
 
-  @NonEnumerable
+  @enumerable()
   private static bytesToString(bytes: number[], bigEndian: boolean): string {
     function hex(num: number) {
       // 2 hex characters form a single byte
@@ -573,7 +596,7 @@ export class Guid {
    * @param {number} variantOctet the octet
    * @private
    */
-  @NonEnumerable
+  @enumerable()
   private static getVariant(variantOctet: number): GuidVariant {
     // Chop of the not-related last 5 bits
     return variantOctet >> 5;
@@ -585,7 +608,7 @@ export class Guid {
    * @param timeHiAndVersion {number} the value as an 16-bit unsigned integer
    * @private
    */
-  @NonEnumerable
+  @enumerable()
   private static getVersion(timeHiAndVersion: number): GuidVersion {
     // Chop of the non-related last 12 bits
     return timeHiAndVersion >> 12;
@@ -596,7 +619,7 @@ export class Guid {
    * @param value {string} the input value
    * @private
    */
-  @NonEnumerable
+  @enumerable()
   private static detectVariant(value: string): GuidVariant {
     // Can be read from 8th byte + 3 dashes included
     return Guid.getVariant(parseInt(value.substring(16, 18), 16));
@@ -607,7 +630,7 @@ export class Guid {
    * @param value {string} the input value
    * @private
    */
-  @NonEnumerable
+  @enumerable()
   private static detectVersion(value: string): GuidVersion {
     // Can be read from 6th and 7th byte + 2 dashes included
     return Guid.getVersion(parseInt(value.substring(14, 18), 16));
@@ -618,7 +641,7 @@ export class Guid {
    * @param variant {GuidVariant} the variant
    * @private
    */
-  @NonEnumerable
+  @enumerable()
   private static isBigEndian(variant: GuidVariant) {
     return variant !== GuidVariant.MicrosoftReserved;
   }
@@ -629,7 +652,7 @@ export class Guid {
    * @param bigEndian {boolean} true if the value has the MSB first
    * @private
    */
-  @NonEnumerable
+  @enumerable()
   private static toNumber(bytes: number[], bigEndian: boolean): number {
     let result = 0;
 
@@ -649,7 +672,7 @@ export class Guid {
    * @param bytes {number[]} the byte array
    * @private
    */
-  @NonEnumerable
+  @enumerable()
   private static swapLayout(bytes: number[]): number[] {
     const result = bytes.slice();
 

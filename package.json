@@ -20,29 +20,27 @@
   "module": "dist/ts-guid.es6.esm.js",
   "browser": "dist/ts-guid.es6.iife.js",
   "unpkg": "dist/ts-guid.es6.umd.js",
-  "types": "dist/ts-guid.d.ts",
+  "types": "types/index.d.ts",
   "files": [
     "dist",
-    "lib",
     "src",
     "types"
   ],
   "scripts": {
-    "build": "yarn clean && rollup -c ./config/rollup.js",
-    "build:ci": "cross-env CI=true rollup -c ./config/rollup.js",
+    "build": "yarn clean && tsc && rollup -c ./config/rollup.js",
+    "build:ci": "cross-env CI=true tsc && rollup -c ./config/rollup.js",
     "changelog": "conventional-changelog -i ./CHANGELOG.md -s -n ./config/changelog.js",
     "ci": "yarn install --frozen-lockfile --non-interactive",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist types",
     "clean:deps": "rimraf node_modules",
-    "dev": "tsc",
+    "dev": "tsc --watch --noEmit",
     "lint": "yarn lint:files .",
+    "lint:ci": "eslint .",
     "lint:files": "eslint --fix",
     "release": "standard-version",
-    "test": "yarn test:node && yarn test:jsdom",
-    "test:node": "jest -c config/jest-node.js",
-    "test:jsdom": "jest -c config/jest-jsdom.js",
-    "test:ci": "cross-env CI=true yarn lint && yarn test:coverage",
-    "test:coverage": "yarn test:node --coverage && yarn test:jsdom"
+    "test": "jest -c config/jest.js",
+    "test:ci": "cross-env CI=true yarn lint:ci && yarn test:coverage",
+    "test:coverage": "yarn test --coverage"
   },
   "gitHooks": {
     "pre-commit": "lint-staged -c ./config/lint-staged.js",

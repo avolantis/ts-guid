@@ -1,4 +1,4 @@
-import { BYTE_COUNT } from "../constants";
+import { BYTE_COUNT } from "../Constants";
 
 /**
  * Unsafe random generator function that uses <tt>Math.random()</tt>.
@@ -7,7 +7,7 @@ import { BYTE_COUNT } from "../constants";
 export function unsafeRandom(): number[] {
   const result = new Array<number>(BYTE_COUNT);
   for (let i = 0; i < BYTE_COUNT; i++) {
-    const seed = ((1 + Math.random()) * 0x10000) | 0;
+    const seed = ((1 + Math.random()) * 0x100) | 0;
     result[i] = parseInt(seed.toString(16).substring(1), 16);
   }
   // Per 4.4, set bits indicating Guid (UUID) version 4 and 'clock_seq_hi_and_reserved'
