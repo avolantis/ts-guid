@@ -554,7 +554,7 @@ export class Guid {
 
     for (let i = 1; i <= 32; i += 2) {
       // 2 hex characters form a single byte
-      bytes[i] = parseInt(value.substring(i - 1, i + 1), 16);
+      bytes[i / 2] = parseInt(value.substring(i - 1, i + 1), 16);
     }
 
     if (!bigEndian) {
