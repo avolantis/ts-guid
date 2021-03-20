@@ -3,6 +3,7 @@
  */
 export function enumerable(value = false, readonly = false) {
   return function (
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     target: any,
     name: keyof typeof target,
     desc?: PropertyDescriptor

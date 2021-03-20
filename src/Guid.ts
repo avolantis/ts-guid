@@ -1,7 +1,7 @@
 import { GuidVersion } from "./GuidVersion";
 import { GuidVariant } from "./GuidVariant";
 import { v4_crypto } from "./generator";
-import { BYTE_COUNT, EMPTY_BYTES, EMPTY_VALUE, FORMATTER } from "./constants";
+import { BYTE_COUNT, EMPTY_BYTES, EMPTY_VALUE, FORMATTER } from "./Constants";
 import { enumerable } from "./Enumerable";
 
 /**

@@ -1,4 +1,4 @@
-import { BYTE_COUNT } from "../constants";
+import { BYTE_COUNT } from "../Constants";
 
 /**
  * Unsafe random generator function that uses <tt>Math.random()</tt>.

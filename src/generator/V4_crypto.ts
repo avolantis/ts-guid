@@ -1,4 +1,4 @@
-import { BYTE_COUNT, EMPTY_VALUE } from "../constants";
+import { BYTE_COUNT, EMPTY_VALUE } from "../Constants";
 
 /**
  * The default generator function, which generates unique and valid V4 GUID-s
