@@ -15,8 +15,8 @@ Features:
 - Zero package.json production dependencies
 - Shipped as
     - TypeScript sources (`src/`)
+    - TypeScript declarations (`types/`)
     - Distribution bundles (`dist/`):
-      - TypeScript declarations
       - ESNext modules *(esm)* targeting browsers and node
       - ES6 modules *(esm)* targeting browsers and node
       - ES6 self-executing function *(iife)*

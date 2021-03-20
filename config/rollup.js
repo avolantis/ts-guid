@@ -21,7 +21,7 @@ export default [
         include: /\.ts?$/,
         exclude: /node_modules|tests/,
         sourceMap: true,
-        minify: false,
+        minify: true,
         target: "esnext",
         tsconfig: "tsconfig.json"
       })

@@ -1,5 +1,6 @@
 const types = require("./config/commit");
 module.exports = {
+  packageFiles: ["package.json"],
   bumpFiles: [
     {
       filename: "README.md",

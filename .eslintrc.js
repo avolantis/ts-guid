@@ -59,7 +59,10 @@ module.exports = {
       env: {
         jest: true
       },
-      files: "tests/**/*.ts"
+      files: "tests/**/*.ts",
+      parserOptions: {
+        project: resolve(__dirname, "tests/tsconfig.json")
+      }
     }
   ]
 };
