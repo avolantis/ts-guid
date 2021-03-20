@@ -1,12 +1,14 @@
 const { resolve } = require("path");
 
 module.exports = {
-  rootDir: resolve(__dirname, "../tests"),
+  rootDir: resolve(__dirname, ".."),
   preset: "ts-jest",
   testEnvironment: "jsdom",
   collectCoverageFrom: ["<rootDir>/src/**/*.ts"],
   coverageDirectory: "<rootDir>/coverage",
   globals: {
-    "ts-jest": {}
+    "ts-jest": {
+      tsconfig: resolve(__dirname, "../tests/tsconfig.json")
+    }
   }
 };
