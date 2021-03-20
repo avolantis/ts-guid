@@ -271,7 +271,7 @@ export class Guid {
           "The generator function does not generate valid bytes"
         );
       }
-      if (val1.some((x) => val2.indexOf(x) > -1)) {
+      if (val1.every((x, i) => val2[i] === x)) {
         throw new TypeError(
           "The generator function does not generate unique values"
         );
