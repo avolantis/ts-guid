@@ -20,6 +20,61 @@ describe("Guid.prototype.equals()", () => {
   });
 });
 
+describe("Guid.prototype.valueEquals()", () => {
+  it("returns true if other Guid is the same value-wise", () => {
+    const guid1 = Guid.parse("c4f3a98a-f800-49a1-b90a-84b228c4009f");
+    const guid2 = Guid.parse("c4f3a98a-f800-49a1-b90a-84b228c4009f");
+    const guid4 = Guid.newGuid();
+    const guid6 = Guid.parse(guid4.toString());
+
+    expect(guid1.valueEquals(guid2)).toBeTruthy();
+    expect(guid2.valueEquals(guid1)).toBeTruthy();
+    expect(guid4.valueEquals(guid6)).toBeTruthy();
+  });
+
+  it("returns false if other Guid is not the same value-wise", () => {
+    const guid1 = Guid.parse("c4f3a98a-f800-49a1-b90a-84b228c4009f");
+    const guid2 = Guid.parse("c4f3a98a-f800-49a1-b90a-84b228c4129f");
+    const guid3 = Guid.newGuid();
+    const guid4 = Guid.newGuid();
+
+    expect(guid1.valueEquals(guid2)).toBeFalsy();
+    expect(guid1.valueEquals(guid3)).toBeFalsy();
+    expect(guid1.valueEquals(guid4)).toBeFalsy();
+    expect(guid2.valueEquals(guid3)).toBeFalsy();
+    expect(guid2.valueEquals(guid4)).toBeFalsy();
+    expect(guid3.valueEquals(guid4)).toBeFalsy();
+  });
+
+  it("returns true if other Guid is equals value-wise but not type-wise", () => {
+    const guid1 = Guid.parse("c4f3a98a-f800-49a1-b90a-84b228c4009f");
+    const guid2 = "c4f3a98a-f800-49a1-b90a-84b228c4009f";
+    const guid3 = {
+      toString() {
+        return guid2;
+      }
+    };
+
+    // @ts-ignore
+    expect(guid1.valueEquals(guid2)).toBeTruthy();
+    // @ts-ignore
+    expect(guid1.valueEquals(guid3)).toBeTruthy();
+    // @ts-ignore
+    expect(Guid.parse(guid2).valueEquals(guid3)).toBeTruthy();
+  });
+
+  it("returns false if other Guid is neither equals value-wise nor type-wise", () => {
+    const guid1 = Guid.parse("c4f3a98a-f800-49a1-b90a-84b228c4009f");
+    const guid2 = "c4f3a98a-f800-49a1-b90a-84b228c4009";
+    const guid3 = "c4f3a98a-f800-49a1-b90a-84b228c4009a";
+
+    // @ts-ignore
+    expect(guid1.valueEquals(guid2)).toBeFalsy();
+    // @ts-ignore
+    expect(guid1.valueEquals(guid3)).toBeFalsy();
+  });
+});
+
 describe("Guid.prototype.isEmpty()", () => {
   it("returns true if the Guid is empty", () => {
     const guid1 = Guid.parse("00000000-0000-0000-0000-000000000000");

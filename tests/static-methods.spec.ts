@@ -54,3 +54,54 @@ describe("Guid.equals()", () => {
     expect(Guid.equals(guid, function () {})).toBeFalsy();
   });
 });
+
+describe("Guid.valueEquals()", () => {
+  it("returns true if two Guids are the same value-wise", () => {
+    const guid1 = Guid.parse("c4f3a98a-f800-49a1-b90a-84b228c4009f");
+    const guid2 = Guid.parse("c4f3a98a-f800-49a1-b90a-84b228c4009f");
+    const guid4 = Guid.newGuid();
+    const guid6 = Guid.parse(guid4.toString());
+
+    expect(Guid.valueEquals(guid1, guid2)).toBeTruthy();
+    expect(Guid.valueEquals(guid2, guid1)).toBeTruthy();
+    expect(Guid.valueEquals(guid4, guid6)).toBeTruthy();
+  });
+
+  it("returns false if two Guids are not the same value-wise", () => {
+    const guid1 = Guid.parse("c4f3a98a-f800-49a1-b90a-84b228c4009f");
+    const guid2 = Guid.parse("c4f3a98a-f800-49a1-b90a-84b228c4129f");
+    const guid3 = Guid.newGuid();
+    const guid4 = Guid.newGuid();
+
+    expect(Guid.valueEquals(guid1, guid2)).toBeFalsy();
+    expect(Guid.valueEquals(guid3, guid4)).toBeFalsy();
+  });
+
+  it("returns true if second Guid is equals value-wise but not type-wise", () => {
+    const guid1 = Guid.parse("c4f3a98a-f800-49a1-b90a-84b228c4009f");
+    const guid2 = "c4f3a98a-f800-49a1-b90a-84b228c4009f";
+    const guid3 = {
+      toString() {
+        return guid2;
+      }
+    };
+
+    // @ts-ignore
+    expect(Guid.valueEquals(guid1, guid2)).toBeTruthy();
+    // @ts-ignore
+    expect(Guid.valueEquals(guid1, guid3)).toBeTruthy();
+    // @ts-ignore
+    expect(Guid.valueEquals(Guid.parse(guid2), guid3)).toBeTruthy();
+  });
+
+  it("returns false if second Guid is neither equals value-wise nor type-wise", () => {
+    const guid1 = Guid.parse("c4f3a98a-f800-49a1-b90a-84b228c4009f");
+    const guid2 = "c4f3a98a-f800-49a1-b90a-84b228c4009";
+    const guid3 = "c4f3a98a-f800-49a1-b90a-84b228c4009a";
+
+    // @ts-ignore
+    expect(Guid.valueEquals(guid1, guid2)).toBeFalsy();
+    // @ts-ignore
+    expect(Guid.valueEquals(guid1, guid3)).toBeFalsy();
+  });
+});

@@ -163,6 +163,26 @@ console.log(a == b); // Prints false, which is WRONG
 console.log(a === b); // Prints false, which is WRONG
 ```
 
+#### `Guid.valueEquals(guid1,guid2)`
+
+Returns true, if
+
+- `guid1` is an instance of `Guid`, and
+- `guid1` and `guid2` represent the same GUID value-wise
+
+```javascript
+const a = Guid.parse("c959e321-19df-474c-a2e7-df268dbf3998");
+const b = "c959e321-19df-474c-a2e7-df268dbf3998";
+const c = {
+  toString() {
+    return "c959e321-19df-474c-a2e7-df268dbf3998"
+  }
+}
+
+console.log(a.valueEquals(b)) // Prints true
+console.log(a.valueEquals(c)) // Prints true
+```
+
 #### `Guid.validate(value)`
 Determines if a string or bytes array value represents a valid GUID.
 
@@ -185,6 +205,10 @@ The [the generator function](#the-generator-function) used to generate new
 
 #### `equals(other)`
 Returns true if `other` is Guid and represents the same GUID as this one.
+
+#### `valueEquals(other)`
+
+Returns true if `other?.toString()` returns the string value that is equals to this GUID's string representation
 
 #### `isEmpty()`
 Returns true if the GUID equals to `Guid.EMPTY`, otherwise false.
