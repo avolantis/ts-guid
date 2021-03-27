@@ -179,6 +179,17 @@ export class Guid {
   }
 
   /**
+   * Checks if this {@link Guid} is equals to another value-wise.
+   *
+   * @param {Guid} other
+   * @returns {boolean}
+   */
+  @enumerable(true)
+  public valueEquals(other: Guid): boolean {
+    return this._value === other?.toString();
+  }
+
+  /**
    * Returns true if this {@link Guid} is equals to {@link Guid.EMPTY}.
    * @returns boolean
    */
@@ -338,6 +349,22 @@ export class Guid {
   @enumerable(true)
   public static equals(a: Guid, b: Guid): boolean {
     return Guid.isGuid(a) && a.equals(b);
+  }
+
+  /**
+   * Checks if <tt>a</tt> {@link Guid} equals <tt>b</tt> {@link Guid} value-wise.
+   *
+   * @remarks
+   * This method does a strict type check to see if <tt>a</tt>
+   * is an instance of {@link Guid} but not for <tt>b</tt>.
+   *
+   * @param {Guid} a
+   * @param {Guid} b
+   * @returns {boolean}
+   */
+  @enumerable(true)
+  public static valueEquals(a: Guid, b: Guid): boolean {
+    return Guid.isGuid(a) && a.valueEquals(b);
   }
 
   /**
