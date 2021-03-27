@@ -191,7 +191,7 @@ export class Guid {
 
   /**
    * Returns true if this {@link Guid} is equals to {@link Guid.EMPTY}.
-   * @returns boolean
+   * @returns {boolean}
    */
   @enumerable(true)
   public isEmpty(): boolean {
@@ -200,14 +200,17 @@ export class Guid {
 
   /**
    * Returns the 16-byte value of this {@link Guid}.
+   * @param toLittleEndian (optional) signals that the bytes should encode the
+   * first three fields of this {@link Guid} as little-endian numbers. Defaults
+   * to {@link Guid.useLittleEndianBytes}.
    * @returns {number[]}
    */
   @enumerable(true)
-  public toByteArray(): number[] {
+  public toByteArray(toLittleEndian = Guid.useLittleEndianBytes): number[] {
     if (!this._bytes) {
       this._bytes = Guid.stringToBytes(
         this._value,
-        Guid.isBigEndian(this.variant)
+        !toLittleEndian && Guid.isBigEndian(this.variant)
       );
     }
 
@@ -273,6 +276,15 @@ export class Guid {
    */
   @enumerable(true)
   public static readonly EMPTY: Guid = new Guid(EMPTY_VALUE, EMPTY_BYTES);
+
+  /**
+   * Changes the default behavior of {@link fromByteArray} and {@link toByteArray}
+   * to consume and output byte arrays respectively, containing the first three
+   * fields of the Guid as little-endian numbers. This is useful when reading or
+   * to output .NET-compatible byte array representations.
+   */
+  @enumerable(true)
+  public static useLittleEndianBytes = false;
 
   /**
    * Gets the generator function
@@ -380,17 +392,24 @@ export class Guid {
   /**
    * Creates a new {@link Guid} from a byte array.
    * @param bytes a 16-length array of 8-bit unsigned integers
+   * @param isLittleEndian (optional) signals that the bytes encode the first
+   * three fields of the Guid as little-endian numbers. Defaults to
+   * {@link Guid.useLittleEndianBytes}.
    */
   @enumerable(true)
-  public static fromByteArray(bytes: number[]): Guid {
-    const result = Guid.checkBytes(bytes);
+  public static fromByteArray(
+    bytes: number[],
+    isLittleEndian = Guid.useLittleEndianBytes
+  ): Guid {
+    const result = Guid.checkBytes(bytes, isLittleEndian);
 
     if (result == null) {
       throw new TypeError("Incorrect bytes received for a GUID!");
     }
 
     const [bts, variant, version] = result;
-    const value = Guid.bytesToString(bytes, Guid.isBigEndian(variant));
+    const bigEndian = !isLittleEndian && Guid.isBigEndian(variant);
+    const value = Guid.bytesToString(bytes, bigEndian);
     const guid = new Guid(value, bts);
     guid._variant = variant;
     guid._version = version;
@@ -490,7 +509,7 @@ export class Guid {
     }
 
     if (Array.isArray(value)) {
-      return !!Guid.checkBytes(value as number[]);
+      return !!Guid.checkBytes(value as number[], false);
     }
 
     return false;
@@ -498,7 +517,8 @@ export class Guid {
 
   @enumerable()
   private static checkBytes(
-    bytes: number[]
+    bytes: number[],
+    isLittleEndian: boolean
   ): [number[], GuidVariant, GuidVersion] | null {
     if (bytes.length !== BYTE_COUNT) {
       // not the right amount of bytes are in the collection
@@ -522,9 +542,9 @@ export class Guid {
       }
     }
 
-    const version = Guid.getVersion(
-      Guid.toNumber(bytes.slice(6, 8), Guid.isBigEndian(variant))
-    );
+    const bigEndian = !isLittleEndian && Guid.isBigEndian(variant);
+    const timeHiAndVersion = Guid.toNumber(bytes.slice(6, 8), bigEndian);
+    const version = Guid.getVersion(timeHiAndVersion);
     if (version < 1 || version > 5) {
       // Unknown version
       return null;
