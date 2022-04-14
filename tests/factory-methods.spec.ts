@@ -81,3 +81,20 @@ describe("Guid.parse()", () => {
     expect(() => Guid.parse(() => ({}))).toThrow(TypeError);
   });
 });
+
+describe("Guid.fromByteArray()", () => {
+  it("can create from a valid byte array", () => {
+    // prettier-ignore
+    const bytes1 = [239, 213, 36, 38, 131, 184, 75, 143, 130, 218, 163, 115, 196, 47, 190, 88];
+    const str1 = "efd52426-83b8-4b8f-82da-a373c42fbe58";
+    const guid2 = Guid.parse(str1);
+    const guid1 = Guid.fromByteArray(bytes1);
+
+    expect(guid2.toString()).toBe(str1);
+    expect(guid2.toByteArray()).toStrictEqual(bytes1);
+
+    expect(guid1.isEmpty()).toBeFalsy();
+    expect(guid1.toString()).toBe(str1);
+    expect(guid1.toByteArray()).toStrictEqual(bytes1);
+  });
+});
