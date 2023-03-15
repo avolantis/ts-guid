@@ -71,7 +71,7 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.32.1",
     "rollup-plugin-dts": "^3.0.1",
-    "rollup-plugin-esbuild": "^3.0.0",
+    "rollup-plugin-esbuild": "^5.0.0",
     "rollup-plugin-node-externals": "^2.2.0",
     "standard-version": "^9.0.0",
     "ts-jest": "^26.4.3",
