@@ -60,7 +60,7 @@
     "conventional-changelog-cli": "^2.1.1",
     "conventional-changelog-conventionalcommits": "^4.5.0",
     "cross-env": "^7.0.2",
-    "esbuild": "^0.10.2",
+    "esbuild": "^0.17.11",
     "eslint": "^7.11.0",
     "eslint-plugin-jest": "^24.1.0",
     "eslint-plugin-package-json": "^0.1.4",
